@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/layout/Header.js";
 import TodoList from "./components/TodoList.js";
 import AddTodo from "./components/AddTodo.js";
+import About from "./components/views/About.js";
 //import logo, { ReactComponent } from "./logo.svg";
 import "./App.css";
 import uuid from "uuid";
@@ -58,17 +60,28 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="container">
-          <Header />
-          <AddTodo onCreate={this.handleCreate} />
-          <TodoList
-            todos={this.state.todos}
-            onUpdate={this.handleUpdate}
-            onDelete={this.handleDelete}
-          />
+      <Router>
+        <div className="App">
+          <div className="container">
+            <Header />
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <React.Fragment>
+                  <AddTodo onCreate={this.handleCreate} />
+                  <TodoList
+                    todos={this.state.todos}
+                    onUpdate={this.handleUpdate}
+                    onDelete={this.handleDelete}
+                  />
+                </React.Fragment>
+              )}
+            />
+            <Route path="/about" component={About} />
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
