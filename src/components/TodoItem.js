@@ -10,19 +10,25 @@ export class TodoItem extends Component {
       textDecoration: this.props.todo.completed ? "line-through" : "none"
     };
   };
+
+  handleCompletedToggle = e => {
+    const updatedTodo = { ...this.props.todo };
+    updatedTodo.completed = !updatedTodo.completed;
+    this.props.onTodoUpdate(updatedTodo);
+  };
+
   render() {
     const { id, title, completed } = this.props.todo;
-    const { onUpdate, onDelete } = this.props;
     return (
       <div style={this.getStyle()}>
         <p>
           <input
             type="checkbox"
             checked={completed}
-            onChange={() => onUpdate(id)}
+            onChange={this.handleCompletedToggle}
           />
           {title}
-          <button onClick={() => onDelete(id)} style={btnStyle}>
+          <button onClick={() => this.props.onTodoDelete(id)} style={btnStyle}>
             x
           </button>
         </p>
@@ -33,7 +39,9 @@ export class TodoItem extends Component {
 
 // PropTypes
 TodoItem.propTypes = {
-  todo: PropTypes.object.isRequired
+  todo: PropTypes.object.isRequired,
+  onTodoUpdate: PropTypes.func.isRequired,
+  onTodoDelete: PropTypes.func.isRequired
 };
 
 const btnStyle = {

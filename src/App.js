@@ -4,58 +4,86 @@ import Header from "./components/layout/Header.js";
 import TodoList from "./components/TodoList.js";
 import AddTodo from "./components/AddTodo.js";
 import About from "./components/views/About.js";
-//import logo, { ReactComponent } from "./logo.svg";
 import "./App.css";
-import uuid from "uuid";
+import axios from "axios";
 
 class App extends Component {
   state = {
-    todos: [
-      {
-        id: uuid.v4(),
-        title: "Take out the trash",
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: "Dinner with wife",
-        completed: true
-      },
-      {
-        id: uuid.v4(),
-        title: "Meeting with boss",
-        completed: false
-      }
-    ]
+    todos: []
   };
 
+  componentDidMount() {
+    this.readTodosPromise().then(todos =>
+      this.setState({
+        todos
+      })
+    );
+  }
+
   // Create Todo
-  handleCreate = title => {
-    const newTodo = {
-      id: uuid.v4(),
-      title,
-      completed: false
-    };
-    this.setState({
-      todos: [...this.state.todos, newTodo]
-    });
+  createTodoPromise = title =>
+    axios
+      .post("https://jsonplaceholder.typicode.com/todos", {
+        title,
+        completed: false
+      })
+      .then(res => res.data);
+
+  // Read All Todos
+  readTodosPromise = () =>
+    axios
+      .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
+      .then(res => res.data);
+
+  // Read Todo
+  readTodoPromise = id =>
+    axios
+      .get(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(res => res.data);
+
+  // Update Todo
+  updateTodoPromise = todo =>
+    axios
+      .patch(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, {
+        title: todo.title,
+        completed: false
+      })
+      .then(res => res.data);
+
+  // Delete Todo
+  deleteTodoPromise = id =>
+    axios
+      .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(res => res.data);
+
+  // Create Todo
+  handleTodoCreate = title => {
+    this.createTodoPromise(title).then(todo =>
+      this.setState({
+        todos: [...this.state.todos, todo]
+      })
+    );
   };
 
   // Update Todo
-  handleUpdate = id => {
-    this.setState({
-      todos: this.state.todos.map(todo => {
-        if (todo.id === id) todo.completed = !todo.completed;
-        return todo;
+  handleTodoUpdate = updatedTodo => {
+    this.updateTodoPromise(updatedTodo).then(todo =>
+      this.setState({
+        todos: this.state.todos.map(todo => {
+          if (todo.id === updatedTodo.id) todo.completed = !todo.completed;
+          return todo;
+        })
       })
-    });
+    );
   };
 
   // Delete Todo
-  handleDelete = id => {
-    this.setState({
-      todos: this.state.todos.filter(todo => todo.id !== id)
-    });
+  handleTodoDelete = id => {
+    this.deleteTodoPromise(id).then(todo =>
+      this.setState({
+        todos: this.state.todos.filter(todo => todo.id !== id)
+      })
+    );
   };
 
   render() {
@@ -69,11 +97,11 @@ class App extends Component {
               path="/"
               render={props => (
                 <React.Fragment>
-                  <AddTodo onCreate={this.handleCreate} />
+                  <AddTodo onTodoCreate={this.handleTodoCreate} />
                   <TodoList
                     todos={this.state.todos}
-                    onUpdate={this.handleUpdate}
-                    onDelete={this.handleDelete}
+                    onTodoUpdate={this.handleTodoUpdate}
+                    onTodoDelete={this.handleTodoDelete}
                   />
                 </React.Fragment>
               )}

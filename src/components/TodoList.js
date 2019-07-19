@@ -8,8 +8,8 @@ class Todos extends Component {
       <TodoItem
         key={todo.id}
         todo={todo}
-        onUpdate={this.props.onUpdate}
-        onDelete={this.props.onDelete}
+        onTodoUpdate={this.props.onTodoUpdate}
+        onTodoDelete={this.props.onTodoDelete}
       />
     ));
   }
@@ -17,7 +17,9 @@ class Todos extends Component {
 
 // PropTypes
 Todos.propTypes = {
-  todos: PropTypes.array.isRequired
+  todos: PropTypes.array.isRequired,
+  onTodoUpdate: PropTypes.func.isRequired,
+  onTodoDelete: PropTypes.func.isRequired
 };
 
 export default Todos;

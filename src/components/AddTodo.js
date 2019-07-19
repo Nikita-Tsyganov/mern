@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export class AddTodo extends Component {
   state = {
@@ -8,7 +9,7 @@ export class AddTodo extends Component {
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onCreate(this.state.title);
+    this.props.onTodoCreate(this.state.title);
     this.setState({ title: "" });
   };
 
@@ -33,5 +34,10 @@ export class AddTodo extends Component {
     );
   }
 }
+
+// PropTypes
+AddTodo.propTypes = {
+  onTodoCreate: PropTypes.func.isRequired
+};
 
 export default AddTodo;
