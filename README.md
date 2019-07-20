@@ -13,11 +13,11 @@
 3. Run `npm install` command
 4. Run `npm start` command
 
-#### The website will automatically open in your browser at [http://localhost:3001](http://localhost:3001)
+The website will automatically open in your browser at [http://localhost:3001](http://localhost:3001)
 
 ## Backend Server API
 
-### Server resides at [http://localhost:5000](http://localhost:5000)
+Server resides at [http://localhost:5000](http://localhost:5000)
 
 ### Available Endpoints
 
@@ -45,9 +45,9 @@ http://localhost:5000/api/todos
 
 Parameters
 
-```json
+```markdown
 {
-    "title": <todo_title>
+"title": <todo_title>
 }
 ```
 
@@ -61,10 +61,10 @@ http://localhost:5000/api/todos/<todo_id>
 
 Parameters
 
-```json
+```markdown
 {
-    "title": <todo_title>,
-    "completed": <true/false>
+"title": <todo_title>,
+"completed": <true/false>
 }
 ```
 
