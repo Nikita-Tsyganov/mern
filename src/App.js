@@ -5,7 +5,7 @@ import TodoList from "./components/TodoList.js";
 import AddTodo from "./components/AddTodo.js";
 import About from "./components/views/About.js";
 import "./App.css";
-import axios from "axios";
+import DB from "./database/DB.js";
 
 class App extends Component {
   state = {
@@ -13,7 +13,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.readTodosPromise().then(todos =>
+    DB.all().then(todos =>
       this.setState({
         todos
       })
@@ -21,44 +21,8 @@ class App extends Component {
   }
 
   // Create Todo
-  createTodoPromise = title =>
-    axios
-      .post("https://jsonplaceholder.typicode.com/todos", {
-        title,
-        completed: false
-      })
-      .then(res => res.data);
-
-  // Read All Todos
-  readTodosPromise = () =>
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
-      .then(res => res.data);
-
-  // Read Todo
-  readTodoPromise = id =>
-    axios
-      .get(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then(res => res.data);
-
-  // Update Todo
-  updateTodoPromise = todo =>
-    axios
-      .patch(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, {
-        title: todo.title,
-        completed: false
-      })
-      .then(res => res.data);
-
-  // Delete Todo
-  deleteTodoPromise = id =>
-    axios
-      .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then(res => res.data);
-
-  // Create Todo
   handleTodoCreate = title => {
-    this.createTodoPromise(title).then(todo =>
+    DB.create(title).then(todo =>
       this.setState({
         todos: [...this.state.todos, todo]
       })
@@ -67,7 +31,7 @@ class App extends Component {
 
   // Update Todo
   handleTodoUpdate = updatedTodo => {
-    this.updateTodoPromise(updatedTodo).then(todo =>
+    DB.update(updatedTodo).then(todo =>
       this.setState({
         todos: this.state.todos.map(todo => {
           if (todo.id === updatedTodo.id) todo.completed = !todo.completed;
@@ -79,7 +43,7 @@ class App extends Component {
 
   // Delete Todo
   handleTodoDelete = id => {
-    this.deleteTodoPromise(id).then(todo =>
+    DB.delete(id).then(todo =>
       this.setState({
         todos: this.state.todos.filter(todo => todo.id !== id)
       })
