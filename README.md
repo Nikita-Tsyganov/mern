@@ -1,13 +1,77 @@
-# MERN - A full stack CRUD app
+# MERN - A MERN stack CRUD app
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+### Pre-requisites
 
-### `npm start`
+- Have [Node.js](https://nodejs.org/en/) installed
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### How to run
 
+1. Clone or download the repository
+2. Navigate to the repository's root folder in your terminal
+3. Run `npm install` command
+4. Run `npm start` command
 
+#### The website will automatically open in your browser at [http://localhost:3001](http://localhost:3001)
 
+## Backend Server API
+
+### Server resides at [http://localhost:5000](http://localhost:5000)
+
+### Available Endpoints
+
+#### `GET` Endpoints
+
+##### Get All Todos
+
+```markdown
+http://localhost:5000/api/todos
+```
+
+##### Get Single Todo
+
+```markdown
+http://localhost:5000/api/todos/<todo_id>
+```
+
+#### `POST` Endpoints
+
+##### Create Todo
+
+```markdown
+http://localhost:5000/api/todos
+```
+
+Parameters
+
+```json
+{
+    "title": <todo_title>
+}
+```
+
+#### `PATCH` Endpoints
+
+##### Update Todo
+
+```markdown
+http://localhost:5000/api/todos/<todo_id>
+```
+
+Parameters
+
+```json
+{
+    "title": <todo_title>,
+    "completed": <true/false>
+}
+```
+
+#### `DELETE` Endpoints
+
+#### Delete Todo
+
+```markdown
+http://localhost:5000/api/todos/<todo_id>
+```
