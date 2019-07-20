@@ -1,5 +1,11 @@
 # MERN - A MERN stack CRUD app
 
+## Description
+
+This is a basic MERN stack CRUD app.
+It uses React with Redux (Redux coming soon) for frontend, Node.js with Express for backend and MongoDB (will be added soon) for a database.
+Bootstrap with SASS are used for styling purposes. (will be implemented soon as well)
+
 ## Getting Started
 
 ### Pre-requisites
