@@ -26,6 +26,7 @@ export class TodoItem extends Component {
             type="checkbox"
             checked={completed}
             onChange={this.handleCompletedToggle}
+            style={checkboxStyle}
           />
           {title}
           <button onClick={() => this.props.onTodoDelete(_id)} style={btnStyle}>
@@ -52,6 +53,10 @@ const btnStyle = {
   borderRadius: "50%",
   cursor: "pointer",
   float: "right"
+};
+
+const checkboxStyle = {
+  cursor: "pointer"
 };
 
 export default TodoItem;
