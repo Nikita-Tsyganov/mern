@@ -11,7 +11,7 @@ Bootstrap with SASS are used for styling purposes. (will be implemented soon as 
 ### Pre-requisites
 
 - Have [Node.js](https://nodejs.org/en/) installed
-- Have [MongodB](https://www.mongodb.com/download-center/community) installed and running
+- Have [MongoDB](https://www.mongodb.com/download-center/community) installed and running
 
 ### How to run
 
