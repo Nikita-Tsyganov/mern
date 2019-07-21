@@ -19,7 +19,7 @@ const DB = {
   // Update Todo
   update: todo =>
     axios
-      .patch(`http://localhost:5000/api/todos/${todo.id}`, {
+      .patch(`http://localhost:5000/api/todos/${todo._id}`, {
         title: todo.title,
         completed: todo.completed
       })

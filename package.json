@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "cors": "^2.8.5",
+    "mongoose": "^5.6.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
@@ -15,7 +16,8 @@
     "start": "concurrently --kill-others \"nodemon server/server.js\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "seed": "node server/database/TodosSeeder.js"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -34,7 +34,7 @@ class App extends Component {
     DB.update(updatedTodo).then(todo =>
       this.setState({
         todos: this.state.todos.map(todo => {
-          if (todo.id === updatedTodo.id) todo.completed = !todo.completed;
+          if (todo._id === updatedTodo._id) todo.completed = !todo.completed;
           return todo;
         })
       })
@@ -45,7 +45,7 @@ class App extends Component {
   handleTodoDelete = id => {
     DB.delete(id).then(todo =>
       this.setState({
-        todos: this.state.todos.filter(todo => todo.id !== id)
+        todos: this.state.todos.filter(todo => todo._id !== id)
       })
     );
   };

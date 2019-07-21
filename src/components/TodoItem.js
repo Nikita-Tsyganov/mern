@@ -18,7 +18,7 @@ export class TodoItem extends Component {
   };
 
   render() {
-    const { id, title, completed } = this.props.todo;
+    const { _id, title, completed } = this.props.todo;
     return (
       <div style={this.getStyle()}>
         <p>
@@ -28,7 +28,7 @@ export class TodoItem extends Component {
             onChange={this.handleCompletedToggle}
           />
           {title}
-          <button onClick={() => this.props.onTodoDelete(id)} style={btnStyle}>
+          <button onClick={() => this.props.onTodoDelete(_id)} style={btnStyle}>
             x
           </button>
         </p>
