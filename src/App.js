@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/layout/Header.js";
-import TodoList from "./components/TodoList.js";
+import Todo from "./components/Todo.js";
 import AddTodo from "./components/AddTodo.js";
 import About from "./components/views/About.js";
-import "./App.css";
+import "./App.scss";
 import DB from "./database/DB.js";
 
 class App extends Component {
@@ -62,11 +62,16 @@ class App extends Component {
               render={props => (
                 <React.Fragment>
                   <AddTodo onTodoCreate={this.handleTodoCreate} />
-                  <TodoList
-                    todos={this.state.todos}
-                    onTodoUpdate={this.handleTodoUpdate}
-                    onTodoDelete={this.handleTodoDelete}
-                  />
+                  <div>
+                    {this.state.todos.map(todo => (
+                      <Todo
+                        key={todo._id}
+                        todo={todo}
+                        onTodoUpdate={this.handleTodoUpdate}
+                        onTodoDelete={this.handleTodoDelete}
+                      />
+                    ))}
+                  </div>
                 </React.Fragment>
               )}
             />
