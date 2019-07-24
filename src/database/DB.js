@@ -14,7 +14,11 @@ const DB = {
       .post("http://localhost:5000/api/todos", {
         title
       })
-      .then(res => res.data),
+      .then(res => {
+        console.log("this is res.data");
+        console.log(res.data);
+        return res.data;
+      }),
 
   // Update Todo
   update: todo =>

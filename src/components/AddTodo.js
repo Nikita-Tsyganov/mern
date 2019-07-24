@@ -1,17 +1,44 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { createPost } from "../actions/postActions";
 
 export class AddTodo extends Component {
-  state = {
-    title: " "
-  };
+  // state = {
+  //   title: " "
+  // };
 
-  handleChange = e => this.setState({ [e.target.name]: e.target.value });
-  handleSubmit = e => {
+  constructor() {
+    super();
+    this.state = {
+      title: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  // handleChange = e => this.setState({ [e.target.name]: e.target.value });
+  // handleSubmit = e => {
+  //   e.preventDefault();
+  //   this.props.onTodoCreate(this.state.title);
+  //   this.setState({ title: "" });
+  // };
+
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleSubmit(e) {
     e.preventDefault();
-    this.props.onTodoCreate(this.state.title);
-    this.setState({ title: "" });
-  };
+
+    const todo = {
+      title: this.state.title
+    };
+    // console.log("submitting");
+    // console.log(post);
+
+    //call Action
+    this.props.createPost(todo);
+  }
 
   render() {
     return (
@@ -38,6 +65,11 @@ export class AddTodo extends Component {
 // PropTypes
 AddTodo.propTypes = {
   onTodoCreate: PropTypes.func.isRequired
+  //createPost: PropTypes.func.isRequired
 };
 
-export default AddTodo;
+// export default AddTodo;
+export default connect(
+  null,
+  { createPost }
+)(AddTodo);
