@@ -16,6 +16,8 @@ class Posts extends Component {
     this.props.fetchPosts();
   }
   componentWillReceiveProps(nextProps) {
+    console.log("nextProps");
+    console.log(nextProps);
     if (nextProps.newPost) {
       //adds it to the beginning
       this.props.posts.unshift(nextProps.newPost);

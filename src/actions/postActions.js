@@ -3,7 +3,8 @@ import {
   NEW_POST,
   FIND_POST,
   UPDATE_POST,
-  DELETE_POST
+  DELETE_POST,
+  RELOAD_POSTS
 } from "./types";
 import DB from "../database/DB.js";
 
@@ -20,7 +21,6 @@ export const fetchPosts = () => dispatch => {
   //       todos
   //     })
   //   );
-
   DB.all().then(posts => dispatch({ type: FETCH_POSTS, payload: posts }));
 };
 
@@ -86,4 +86,19 @@ export const deletePost = postData => dispatch => {
   DB.delete(postData).then(post =>
     dispatch({ type: DELETE_POST, payload: post })
   );
+};
+
+export const reloadPosts = postData => dispatch => {
+  //   fetch("https://jsonplaceholder.typicode.com/posts", {
+  //     method: "POST",
+  //     headers: {
+  //       "content-type": "application/json"
+  //     },
+  //     body: JSON.stringify(postData)
+  //   })
+  //     .then(res => res.json())
+  //     .then(post => dispatch({ type: NEW_POST, payload: post }));
+  // console.log("postData");
+  // console.log(postData);
+  dispatch({ type: RELOAD_POSTS, payload: postData });
 };

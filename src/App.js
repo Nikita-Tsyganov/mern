@@ -14,6 +14,10 @@ import TodoList from "./components/TodoList";
 import { fetchPosts } from "./actions/postActions";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchPosts();
+    //console.log(todos);
+  }
   render() {
     //console.log(todos);
     return (
@@ -27,7 +31,7 @@ class App extends Component {
                 path="/"
                 render={props => (
                   <React.Fragment>
-                    {/* <AddTodo /> */}
+                    <AddTodo />
                     <TodoList />
                   </React.Fragment>
                 )}
@@ -49,5 +53,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   null,
-  {}
+  { fetchPosts }
 )(App);

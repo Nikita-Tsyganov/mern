@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createPost } from "../actions/postActions";
+import { reloadPosts } from "../actions/postActions";
 
 export class AddTodo extends Component {
   // state = {
@@ -38,6 +39,11 @@ export class AddTodo extends Component {
 
     //call Action
     this.props.createPost(todo);
+    const updatedTodos = Array.from(this.props.todos.items);
+    updatedTodos.push(todo);
+    console.log("updatedTodos");
+    console.log(updatedTodos);
+    this.props.reloadPosts(updatedTodos);
   }
 
   render() {
@@ -64,12 +70,16 @@ export class AddTodo extends Component {
 
 // PropTypes
 AddTodo.propTypes = {
-  onTodoCreate: PropTypes.func.isRequired
-  //createPost: PropTypes.func.isRequired
+  // onTodoCreate: PropTypes.func.isRequired
+  createPost: PropTypes.func.isRequired
 };
+
+const mapStateToProps = state => ({
+  todos: state.todos
+});
 
 // export default AddTodo;
 export default connect(
-  null,
-  { createPost }
+  mapStateToProps,
+  { createPost, reloadPosts }
 )(AddTodo);
