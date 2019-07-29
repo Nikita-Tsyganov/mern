@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-export class TodoItem extends Component {
+export class Todo extends Component {
   getStyle = () => {
     return {
       background: "#f4f4f4",
@@ -39,7 +39,7 @@ export class TodoItem extends Component {
 }
 
 // PropTypes
-TodoItem.propTypes = {
+Todo.propTypes = {
   todo: PropTypes.object.isRequired,
   onTodoUpdate: PropTypes.func.isRequired,
   onTodoDelete: PropTypes.func.isRequired
@@ -59,4 +59,4 @@ const checkboxStyle = {
   cursor: "pointer"
 };
 
-export default TodoItem;
+export default Todo;
