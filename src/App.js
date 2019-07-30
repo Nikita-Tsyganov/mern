@@ -4,8 +4,9 @@ import Header from "./components/layout/Header.js";
 import Todo from "./components/Todo.js";
 import AddTodo from "./components/AddTodo.js";
 import About from "./components/views/About.js";
-import "./App.scss";
+//import "./App.scss";
 import DB from "./database/DB.js";
+import { Container, ListGroup, ListGroupItem } from "reactstrap";
 
 class App extends Component {
   state = {
@@ -54,7 +55,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <div className="container">
+          <Container className="container">
             <Header />
             <Route
               exact
@@ -62,21 +63,22 @@ class App extends Component {
               render={props => (
                 <React.Fragment>
                   <AddTodo onTodoCreate={this.handleTodoCreate} />
-                  <div>
+                  <ListGroup>
                     {this.state.todos.map(todo => (
-                      <Todo
-                        key={todo._id}
-                        todo={todo}
-                        onTodoUpdate={this.handleTodoUpdate}
-                        onTodoDelete={this.handleTodoDelete}
-                      />
+                      <ListGroupItem key={todo._id}>
+                        <Todo
+                          todo={todo}
+                          onTodoUpdate={this.handleTodoUpdate}
+                          onTodoDelete={this.handleTodoDelete}
+                        />
+                      </ListGroupItem>
                     ))}
-                  </div>
+                  </ListGroup>
                 </React.Fragment>
               )}
             />
             <Route path="/about" component={About} />
-          </div>
+          </Container>
         </div>
       </Router>
     );

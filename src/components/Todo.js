@@ -1,16 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Button } from "reactstrap";
 
 export class Todo extends Component {
-  getStyle = () => {
-    return {
-      background: "#f4f4f4",
-      padding: "10px",
-      borderBottom: "1px #ccc dotted",
-      textDecoration: this.props.todo.completed ? "line-through" : "none"
-    };
-  };
-
   handleCompletedToggle = e => {
     const updatedTodo = { ...this.props.todo };
     updatedTodo.completed = !updatedTodo.completed;
@@ -20,19 +12,24 @@ export class Todo extends Component {
   render() {
     const { _id, title, completed } = this.props.todo;
     return (
-      <div style={this.getStyle()}>
-        <p>
-          <input
-            type="checkbox"
-            checked={completed}
-            onChange={this.handleCompletedToggle}
-            style={checkboxStyle}
-          />
-          {title}
-          <button onClick={() => this.props.onTodoDelete(_id)} style={btnStyle}>
-            x
-          </button>
-        </p>
+      <div style={{ textDecoration: completed ? "line-through" : "none" }}>
+        <input
+          type="checkbox"
+          checked={completed}
+          onChange={this.handleCompletedToggle}
+          style={{ cursor: "pointer" }}
+        />
+        {title}
+        <Button
+          type="button"
+          color="danger"
+          size="sm"
+          className="rounded-circle"
+          style={{ float: "right", lineHeight: "0.93rem" }}
+          onClick={() => this.props.onTodoDelete(_id)}
+        >
+          x
+        </Button>
       </div>
     );
   }
@@ -43,20 +40,6 @@ Todo.propTypes = {
   todo: PropTypes.object.isRequired,
   onTodoUpdate: PropTypes.func.isRequired,
   onTodoDelete: PropTypes.func.isRequired
-};
-
-const btnStyle = {
-  background: "#ff0000",
-  color: "#fff",
-  border: "none",
-  padding: "5px 9px",
-  borderRadius: "50%",
-  cursor: "pointer",
-  float: "right"
-};
-
-const checkboxStyle = {
-  cursor: "pointer"
 };
 
 export default Todo;

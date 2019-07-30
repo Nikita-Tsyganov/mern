@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Form, Input, Button } from "reactstrap";
 
 export class AddTodo extends Component {
   state = {
@@ -15,22 +16,27 @@ export class AddTodo extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} style={{ display: "flex" }}>
-        <input
+      <Form
+        onSubmit={this.handleSubmit}
+        className="mt-2 mb-2"
+        style={{ display: "flex" }}
+      >
+        <Input
           type="text"
           name="title"
-          style={{ flex: "10", padding: "5px" }}
           placeholder="Add Todo..."
           value={this.state.title}
           onChange={this.handleChange}
         />
-        <input
+        <Button
           type="submit"
           value="Submit"
-          className="btn"
-          style={{ flex: "1" }}
-        />
-      </form>
+          color="light"
+          style={{ border: "1px solid #ced4da" }}
+        >
+          Submit
+        </Button>
+      </Form>
     );
   }
 }
