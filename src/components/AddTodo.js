@@ -32,9 +32,14 @@ export class AddTodo extends Component {
           type="submit"
           value="Submit"
           color="light"
-          style={{ border: "1px solid #ced4da" }}
+          className="rounded-circle"
+          style={{
+            color: "#888",
+            border: "1px solid #ced4da",
+            marginLeft: "-20px"
+          }}
         >
-          Submit
+          +
         </Button>
       </Form>
     );
