@@ -1,6 +1,6 @@
-export const FETCH_POSTS = "FETCH_POSTS";
-export const NEW_POST = "NEW_POST";
-export const FIND_POST = "FIND_POST";
-export const UPDATE_POST = "UPDATE_POST";
-export const DELETE_POST = "DELETE_POST";
-export const RELOAD_POSTS = "RELOAD_POSTS";
+export const FETCH_TODOS = "FETCH_TODOS";
+export const NEW_TODO = "NEW_TODO";
+export const FIND_TODO = "FIND_TODO";
+export const UPDATE_TODO = "UPDATE_TODO";
+export const DELETE_TODO = "DELETE_TODO";
+export const RELOAD_TODOS = "RELOAD_TODOS";

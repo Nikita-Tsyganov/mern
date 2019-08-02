@@ -4,22 +4,15 @@ import Header from "./components/layout/Header.js";
 import AddTodo from "./components/AddTodo.js";
 import About from "./components/views/About.js";
 import "./App.scss";
-import { Provider } from "react-redux";
 import { connect } from "react-redux";
-import Posts from "./components/Posts";
-import PostForm from "./components/PostForm";
-import DB from "./database/DB.js";
-import store from "./store";
 import TodoList from "./components/TodoList";
-import { fetchPosts } from "./actions/postActions";
+import { fetchTodos } from "./actions/postActions";
 
 class App extends Component {
   componentDidMount() {
-    this.props.fetchPosts();
-    //console.log(todos);
+    this.props.fetchTodos();
   }
   render() {
-    //console.log(todos);
     return (
       <React.Fragment>
         <Router>
@@ -38,9 +31,6 @@ class App extends Component {
               />
               <Route path="/about" component={About} />
             </div>
-            {/* <PostForm />
-            <hr />
-            <Posts /> */}
           </div>
         </Router>
       </React.Fragment>
@@ -51,7 +41,10 @@ const mapStateToProps = state => ({
   todos: state.todos
 });
 
+const mapDispatchToProps = {
+  fetchTodos
+}
 export default connect(
-  null,
-  { fetchPosts }
+  mapStateToProps,
+  mapDispatchToProps
 )(App);

@@ -1,16 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-//connect is used to connect your components to the redux store that was provided by the provider component
-import { updatePost } from "../actions/postActions";
-import { deletePost } from "../actions/postActions";
-import { fetchPosts } from "../actions/postActions";
-import { reloadPosts } from "../actions/postActions";
+import { updateTodo, deleteTodo, fetchTodos, reloadTodos } from "../actions/postActions";
 
 export class TodoItem extends Component {
-  componentDidMount() {
-    // console.log(this.props);
-  }
   getStyle = () => {
     return {
       background: "#f4f4f4",
@@ -22,30 +15,19 @@ export class TodoItem extends Component {
 
   handleCompletedToggle = e => {
     this.props.todo.completed = !this.props.todo.completed;
-    //this.setState({ completed: this.props.todo.completed });
-    // console.log(this.props.todo.completed);
-    this.props.updatePost(this.props.todo);
+    this.props.updateTodo(this.props.todo);
   };
 
   handleDelete = e => {
-    this.props.deletePost(this.props.todo._id);
+    this.props.deleteTodo(this.props.todo._id);
 
-    this.props.reloadPosts(
+    this.props.reloadTodos(
       this.props.todos.items.filter(todo => this.props.todo._id !== todo._id)
     );
-
-    // console.log(this.props.todo._id);
-    // console.log("filtered");
-    // console.log(
-    //   this.props.todos.items.filter(todo => this.props.todo._id !== todo._id)
-    // );
-
-    // console.log(this.props.todos.items);
   };
 
   render() {
     const { todo } = this.props;
-    // console.log(todo);
     return (
       <div style={this.getStyle()}>
         <p>
@@ -81,20 +63,21 @@ const checkboxStyle = {
 
 // export default TodoItem;
 TodoItem.propTypes = {
-  fetchPosts: PropTypes.func.isRequired,
-  updatePost: PropTypes.func.isRequired,
-  deletePost: PropTypes.func.isRequired,
+  fetchTodos: PropTypes.func.isRequired,
+  updateTodo: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
   todo: PropTypes.object
-  // newPost: PropTypes.object
 };
 
 //mapStateToProps get state from redux , map to properties of our component, use the component
 const mapStateToProps = state => ({
   todos: state.todos
 });
-//fetchPosts calls the fetch request
-//second parethesis is the component
+
+const mapDispatchToProps = {
+  updateTodo, deleteTodo, fetchTodos, reloadTodos
+}
 export default connect(
   mapStateToProps,
-  { updatePost, deletePost, fetchPosts, reloadPosts }
+  mapDispatchToProps
 )(TodoItem);

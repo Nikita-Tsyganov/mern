@@ -1,14 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createPost } from "../actions/postActions";
-import { reloadPosts } from "../actions/postActions";
+import { createTodo,  reloadTodos } from "../actions/postActions";
 
 export class AddTodo extends Component {
-  // state = {
-  //   title: " "
-  // };
-
   constructor() {
     super();
     this.state = {
@@ -17,12 +12,6 @@ export class AddTodo extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  // handleChange = e => this.setState({ [e.target.name]: e.target.value });
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   this.props.onTodoCreate(this.state.title);
-  //   this.setState({ title: "" });
-  // };
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -34,9 +23,7 @@ export class AddTodo extends Component {
     const todo = {
       title: this.state.title
     };
-    // console.log("submitting");
-    // console.log(post);
-
+  
     //call Action
     this.props.createPost(todo);
     const updatedTodos = Array.from(this.props.todos.items);
@@ -78,8 +65,13 @@ const mapStateToProps = state => ({
   todos: state.todos
 });
 
+const mapDispatchToProps = {
+  createTodo,
+  reloadTodos
+}
+
 // export default AddTodo;
 export default connect(
   mapStateToProps,
-  { createPost, reloadPosts }
+  mapDispatchToProps
 )(AddTodo);

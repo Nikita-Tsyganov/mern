@@ -1,10 +1,10 @@
 import {
-  FETCH_POSTS,
-  NEW_POST,
-  FIND_POST,
-  UPDATE_POST,
-  DELETE_POST,
-  RELOAD_POSTS
+  FETCH_TODOS,
+  NEW_TODO,
+  FIND_TODO,
+  UPDATE_TODO,
+  DELETE_TODO,
+  RELOAD_TODOS
 } from "../actions/types";
 
 const initialState = {
@@ -13,40 +13,38 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-  console.log("ACTION");
-  console.log(action.type);
   switch (
     action.type //from what you dispatched
   ) {
-    case FETCH_POSTS:
+    case FETCH_TODOS:
       console.log("reducer");
       return {
         ...state,
         items: action.payload
       };
 
-    case NEW_POST:
+    case NEW_TODO:
       return {
         ...state,
         item: action.payload
       };
 
-    case FIND_POST:
+    case FIND_TODO:
       return {
         ...state,
         item: action.payload
       };
-    case UPDATE_POST:
+    case UPDATE_TODO:
       return {
         ...state,
         item: action.payload
       };
-    case DELETE_POST:
+    case DELETE_TODO:
       return {
         ...state,
         item: action.payload
       };
-    case RELOAD_POSTS:
+    case RELOAD_TODOS:
       return {
         ...state,
         items: action.payload

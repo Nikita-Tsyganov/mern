@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Todo from "./Todo";
+import Todo from "./TodoItem";
 import { connect } from "react-redux";
-import { fetchPosts } from "../actions/postActions";
-import { reloadPosts } from "../actions/postActions";
+import { fetchTodos, reloadTodos } from "../actions/postActions";
 
 export class TodoList extends Component {
   render() {
@@ -20,7 +19,12 @@ const mapStateToProps = state => ({
   todos: state.todos
 });
 
+const mapDispatchToProps = {
+  fetchTodos,
+  reloadTodos
+}
+
 export default connect(
   mapStateToProps,
-  { fetchPosts, reloadPosts }
+  mapDispatchToProps
 )(TodoList);
