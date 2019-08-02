@@ -3,15 +3,16 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/layout/Header.js";
 import AddTodo from "./components/AddTodo.js";
 import About from "./components/views/About.js";
+import TodoList from "./components/TodoList";
 import "./App.scss";
 import { connect } from "react-redux";
-import TodoList from "./components/TodoList";
 import { fetchTodos } from "./actions/postActions";
 
 class App extends Component {
   componentDidMount() {
     this.props.fetchTodos();
   }
+
   render() {
     return (
       <React.Fragment>
@@ -43,7 +44,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchTodos
-}
+};
 export default connect(
   mapStateToProps,
   mapDispatchToProps

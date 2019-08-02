@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { updateTodo, deleteTodo, fetchTodos, reloadTodos } from "../actions/postActions";
+import { updateTodo, deleteTodo } from "../actions/postActions";
 
 export class TodoItem extends Component {
   getStyle = () => {
@@ -20,10 +20,6 @@ export class TodoItem extends Component {
 
   handleDelete = e => {
     this.props.deleteTodo(this.props.todo._id);
-
-    this.props.reloadTodos(
-      this.props.todos.items.filter(todo => this.props.todo._id !== todo._id)
-    );
   };
 
   render() {
@@ -63,7 +59,6 @@ const checkboxStyle = {
 
 // export default TodoItem;
 TodoItem.propTypes = {
-  fetchTodos: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
   todo: PropTypes.object
@@ -75,8 +70,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  updateTodo, deleteTodo, fetchTodos, reloadTodos
-}
+  updateTodo,
+  deleteTodo
+};
 export default connect(
   mapStateToProps,
   mapDispatchToProps

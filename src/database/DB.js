@@ -15,8 +15,6 @@ const DB = {
         title
       })
       .then(res => {
-        console.log("this is res.data");
-        console.log(res.data);
         return res.data;
       }),
 

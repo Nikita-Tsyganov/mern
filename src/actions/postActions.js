@@ -3,8 +3,7 @@ import {
   NEW_TODO,
   FIND_TODO,
   UPDATE_TODO,
-  DELETE_TODO,
-  RELOAD_TODOS
+  DELETE_TODO
 } from "./types";
 import DB from "../database/DB.js";
 
@@ -29,11 +28,7 @@ export const updateTodo = todoData => dispatch => {
 };
 
 export const deleteTodo = todoData => dispatch => {
-  DB.delete(todoData).then(todo =>
-    dispatch({ type: DELETE_TODO, payload: todo })
-  );
-};
-
-export const reloadTodos = todoData => dispatch => {
-  dispatch({ type: RELOAD_TODOS, payload: todoData });
+  DB.delete(todoData).then(todo => {
+    dispatch({ type: DELETE_TODO, payload: todo });
+  });
 };

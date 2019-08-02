@@ -3,8 +3,7 @@ import {
   NEW_TODO,
   FIND_TODO,
   UPDATE_TODO,
-  DELETE_TODO,
-  RELOAD_TODOS
+  DELETE_TODO
 } from "../actions/types";
 
 const initialState = {
@@ -17,7 +16,6 @@ export default function(state = initialState, action) {
     action.type //from what you dispatched
   ) {
     case FETCH_TODOS:
-      console.log("reducer");
       return {
         ...state,
         items: action.payload
@@ -25,29 +23,32 @@ export default function(state = initialState, action) {
 
     case NEW_TODO:
       return {
-        ...state,
-        item: action.payload
+        //adds the new item to the array
+        items: [...state.items, action.payload]
       };
 
     case FIND_TODO:
+      //let { _id } = action.payload;
       return {
-        ...state,
-        item: action.payload
+        items: [...state.items].filter(item => item._id === action.payload._id)
       };
+
     case UPDATE_TODO:
+      //update selected item form
+      const updatedItem = { ...action.payload };
       return {
-        ...state,
-        item: action.payload
+        items: [...state.items].map(item => {
+          if (item._id === updatedItem._id) {
+            return updatedItem;
+          } else return item;
+        })
       };
+
     case DELETE_TODO:
+      //filter deleted item from array
+      let { _id } = action.payload;
       return {
-        ...state,
-        item: action.payload
-      };
-    case RELOAD_TODOS:
-      return {
-        ...state,
-        items: action.payload
+        items: [...state.items].filter(item => item._id !== _id)
       };
 
     default:

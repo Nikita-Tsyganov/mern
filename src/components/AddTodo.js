@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createTodo,  reloadTodos } from "../actions/postActions";
+import { createTodo } from "../actions/postActions";
 
 export class AddTodo extends Component {
   constructor() {
@@ -23,14 +23,9 @@ export class AddTodo extends Component {
     const todo = {
       title: this.state.title
     };
-  
+
     //call Action
-    this.props.createPost(todo);
-    const updatedTodos = Array.from(this.props.todos.items);
-    updatedTodos.push(todo);
-    console.log("updatedTodos");
-    console.log(updatedTodos);
-    this.props.reloadPosts(updatedTodos);
+    this.props.createTodo(todo);
   }
 
   render() {
@@ -57,8 +52,7 @@ export class AddTodo extends Component {
 
 // PropTypes
 AddTodo.propTypes = {
-  // onTodoCreate: PropTypes.func.isRequired
-  createPost: PropTypes.func.isRequired
+  createTodo: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -66,11 +60,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  createTodo,
-  reloadTodos
-}
+  createTodo
+};
 
-// export default AddTodo;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
