@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Todos API Routes
 app.use("/api/todos", require("./routes/api/TodosRouter.js"));
+app.use("/api/users", require("./routes/api/UserRouter.js"));
 
 const PORT = /* process.env.PORT ||  */ 5000;
 

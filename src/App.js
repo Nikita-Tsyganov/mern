@@ -4,9 +4,12 @@ import Header from "./components/layout/Header.js";
 import Todo from "./components/Todo.js";
 import AddTodo from "./components/AddTodo.js";
 import About from "./components/views/About.js";
+import Register from "./components/Register";
+import SignIn from "./components/SignIn";
 //import "./App.scss";
 import DB from "./database/DB.js";
 import { Container, ListGroup, ListGroupItem } from "reactstrap";
+import "tachyons";
 
 class App extends Component {
   state = {
@@ -78,6 +81,8 @@ class App extends Component {
               )}
             />
             <Route path="/about" component={About} />
+            <Route path="/register" component={Register} />
+            <Route path="/signin" component={SignIn} />
           </Container>
         </div>
       </Router>

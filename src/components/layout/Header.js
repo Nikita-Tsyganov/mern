@@ -37,6 +37,16 @@ export default class Header extends Component {
                 About
               </Link>
             </NavItem>
+            <NavItem>
+              <Link to="/register" className="nav-link">
+                Register
+              </Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/signin" className="nav-link">
+                Signin
+              </Link>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
