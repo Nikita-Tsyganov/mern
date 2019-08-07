@@ -8,7 +8,9 @@ const UserController = {
 
   // @desc Get A Single Todo
   find: (req, res) => {
+
     User.findById(req.params.id).then(user => res.json(user));
+
   },
 
   // @desc Create A Todo
@@ -19,6 +21,7 @@ const UserController = {
       hash: req.body.hash,
       //dateJoined: req.body.dateJoined,
       name: req.body.name
+
     })
       .save()
       .then(user => res.json(user));

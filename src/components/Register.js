@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DB from "../database/DB";
+import DB from "../database/DB.js";
 
 class Register extends Component {
   constructor() {

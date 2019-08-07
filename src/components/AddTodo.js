@@ -1,18 +1,35 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Form, Input, Button } from "reactstrap";
+import { connect } from "react-redux";
+import { createTodo } from "../actions/actions.js"
 
 export class AddTodo extends Component {
-  state = {
-    title: " "
-  };
+  constructor() {
+    super();
+    this.state = {
+      title: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  handleChange = e => this.setState({ [e.target.name]: e.target.value });
-  handleSubmit = e => {
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleSubmit(e) {
     e.preventDefault();
-    this.props.onTodoCreate(this.state.title);
-    this.setState({ title: "" });
-  };
+
+    const todo = {
+      title: this.state.title
+    };
+
+    //call Action
+    this.props.createTodo(todo);
+
+    this.setState({title:""});
+  }
 
   render() {
     return (
@@ -48,7 +65,18 @@ export class AddTodo extends Component {
 
 // PropTypes
 AddTodo.propTypes = {
-  onTodoCreate: PropTypes.func.isRequired
+  createTodo: PropTypes.func.isRequired
 };
 
-export default AddTodo;
+const mapStateToProps = state => ({
+  todos: state.todos
+});
+
+const mapDispatchToProps = {
+  createTodo
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddTodo);

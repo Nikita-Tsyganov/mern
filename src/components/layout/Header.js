@@ -44,7 +44,7 @@ export default class Header extends Component {
             </NavItem>
             <NavItem>
               <Link to="/signin" className="nav-link">
-                Signin
+                Sign in
               </Link>
             </NavItem>
           </Nav>
