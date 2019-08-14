@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import DB from "../database/DB";
 
 class SignIn extends Component {
   constructor() {
@@ -16,21 +17,9 @@ class SignIn extends Component {
   };
 
   onSubmitSignIn = () => {
-    fetch("https://bluesquare.herokuapp.com/signin", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: this.state.signInEmail,
-        password: this.state.signInPassword
-      })
-    })
-      .then(response => response.json())
-      .then(user => {
-        if (user.id) {
-          this.props.loadUser(user);
-          this.props.onRouteChange("home");
-        }
-      });
+    DB.signIn(this.state.signInEmail, this.state.signInPassword).then(user => {
+      console.log(user);
+    });
     //this.props.onRouteChange("home");
   };
   render() {
@@ -46,7 +35,7 @@ class SignIn extends Component {
                   Email
                 </label>
                 <input
-                  className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  className="pa2 input-reset ba bg-transparent w-100"
                   type="email"
                   name="email-address"
                   id="email-address"
@@ -58,7 +47,7 @@ class SignIn extends Component {
                   Password
                 </label>
                 <input
-                  className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  className="b pa2 input-reset ba bg-transparent w-100"
                   type="password"
                   name="password"
                   id="password"
@@ -75,12 +64,7 @@ class SignIn extends Component {
               />
             </div>
             <div className="lh-copy mt3">
-              <p
-                className="f6 link dim black db pointer"
-                onClick={() => onRouteChange("register")}
-              >
-                Register
-              </p>
+              <p className="f6 link dim black db pointer">Register</p>
             </div>
           </div>
         </main>

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("../models/User.js");
+const bcrypt = require("bcrypt");
 
 // DB Config
 const db = require("../config/database.js").mongoURI;

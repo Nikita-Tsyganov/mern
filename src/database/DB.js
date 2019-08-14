@@ -57,7 +57,15 @@ const DB = {
       .then(res => res.data),
 
   deleteUser: id =>
-    axios.delete(`http://localhost:5000/api/users/${id}`).then(res => res.data)
+    axios.delete(`http://localhost:5000/api/users/${id}`).then(res => res.data),
+
+  signIn: (email, password) =>
+    axios
+      .post(`http://localhost:5000/api/users/signin`, {
+        email,
+        password
+      })
+      .then(res => res.data)
 };
 
 export default DB;
